@@ -10,7 +10,7 @@ public class VelocityEasing3D : MonoBehaviour
     Vector3 inputDir; //current input direction
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -55,6 +55,7 @@ public class VelocityEasing3D : MonoBehaviour
 
 
         rb.linearVelocity = vel;
+        rb.AddTorque(vel.normalized);
     }
 
     Vector3 Direction()
