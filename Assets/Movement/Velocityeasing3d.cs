@@ -21,11 +21,6 @@ public class VelocityEasing3D : MonoBehaviour
         //storing current velocity
         vel = rb.linearVelocity;
 
-        //dir = (-1,-1,0) to (1,1,0)
-        //speed = an arbitrary float from 0 to infinity
-        //let's say speed = 3
-        //when you multiply a vector by a float, it applies the multiplication to each of the individual vector components
-        // dir * speed = (-3,-3,0) to (3,3,0)
         dir *= Speed;
 
         //before applying the LERP, let's check to see if the player
@@ -36,7 +31,7 @@ public class VelocityEasing3D : MonoBehaviour
         }
         if (dir.x < 0)
         {
-            if (vel.x > 0) { vel.x = 0; } //instead of LERP from Speed to -Speed, this halves the distance so we only need to LERP from 0 to -Speed
+            if (vel.x > 0) { vel.x = 0; } 
         }
 
         //LERP stands for linear interpolation
@@ -46,7 +41,7 @@ public class VelocityEasing3D : MonoBehaviour
         vel.x = Mathf.Lerp(vel.x, dir.x, .3f);
 
 
-        if (Input.GetKey(KeyCode.Space) && grounded)   //Why does my character keep floating up?
+        if (Input.GetKey(KeyCode.Space) && grounded) //what makes my character keep floating up? what makes my jump go back down?
         {
             vel.y = JumpPower;
             Debug.Log("jumping");
