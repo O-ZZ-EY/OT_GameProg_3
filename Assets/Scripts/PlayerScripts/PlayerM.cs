@@ -14,15 +14,19 @@ public class PlayerM : MonoBehaviour
 
     Vector3 velocity;
 
-    bool isGrounded;
+    public bool isGrounded;
 
+    private void Start()
+    {
+        groundDistance = transform.localScale.z * 1.5f;
+    }
     // Update is called once per frame
     void Update()
     {
         //checking if we hit the ground to reset our falling velocity, otherwise we will fall faster the next time
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (isGrounded && velocity.y < 0)
+        if (isGrounded)
         {
             velocity.y = -2f;
         }
@@ -36,14 +40,22 @@ public class PlayerM : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
 
         //check if the player is on the ground so he can jump
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             //the equation for jumping
+            Debug.Log("jumping: " + Time.frameCount);
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            isGrounded=false;
         }
 
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
     }
 }

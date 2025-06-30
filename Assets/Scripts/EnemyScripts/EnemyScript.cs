@@ -30,6 +30,12 @@ public class EnemyScript : MonoBehaviour
 
     private void Update()
     {
+        if(!agent.isOnNavMesh)
+        {
+            agent.enabled = false;
+            agent.enabled = true;
+        }
+
         //Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer); //Player, field of view, Layer mask?
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);//Player, Attack range, Layer mask?
@@ -52,6 +58,11 @@ public class EnemyScript : MonoBehaviour
         //Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false; //now restart the whole progress and search for a new walkPoint
+    }
+
+    void EnableAgent()
+    {
+
     }
     private void SearchWalkPoint()
     {
@@ -80,7 +91,7 @@ public class EnemyScript : MonoBehaviour
         if (!alreadyAttacked)
         {
             ///Attack code here
-            
+            Debug.Log($"Attacked {player.name} on frame {Time.frameCount}");
             ///End of attack code
 
             alreadyAttacked = true;
