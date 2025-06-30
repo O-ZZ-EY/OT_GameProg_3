@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    //public static GameManager instance;
 
     public GameObject player;
     public float enemySpawnRange = 10f;
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         CurrentTimer = TimerInterval;
-        instance = this;
+        //instance = this;
         //player = Movementv2.instance.gameObject;
     }
 
@@ -46,15 +46,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SpawnEnemy(GameObject prefab)
-    {
-        Vector3 position;
+    //void SpawnEnemy(GameObject prefab)
+    //{
+        //Vector3 position;
 
-        position = Random.insideUnitSphere * enemySpawnRange;
-        position.z = 0f;
+        //position = Random.insideUnitSphere * enemySpawnRange;
+        //position.z = 0f;
 
-        enemiesList.Add(Instantiate(prefab, position, Quaternion.identity));
-    }
+        //enemiesList.Add(Instantiate(prefab, position, Quaternion.identity));
+    //}
 
     public void EndGame()
     {
